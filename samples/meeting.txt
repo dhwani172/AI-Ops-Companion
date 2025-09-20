@@ -1,0 +1,5 @@
+Team sync notes:
+- Project Phoenix is blocked on API credentials.
+- Frontend needs a decision on the UI library by Friday.
+- Next sprint goal: ship the beta to 10 pilot users.
+- Owners: Aditi (backend), Rahul (frontend), Meera (QA).

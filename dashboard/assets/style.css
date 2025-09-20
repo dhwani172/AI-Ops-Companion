@@ -1,0 +1,180 @@
+﻿/* ---- Cosmic Neon Theme ---- */
+:root {
+   --bg: #04070f;
+   --bg-alt: #0d1324;
+   --panel: rgba(12, 18, 33, 0.78);
+   --panel-solid: #101726;
+   --border: rgba(103, 132, 181, 0.35);
+   --text: #f5f7ff;
+   --muted: #97a5c5;
+   --accent1: #55b2ff;
+   --accent2: #c68fff;
+   --accent3: #44ffd8;
+   --success1: #21b38e;
+   --success2: #32e0b8;
+   --warning: #ffb968;
+}
+
+body,
+.stApp {
+   background: var(--bg);
+   color: var(--text);
+   font-family: "Segoe UI", "Inter", "SF Pro Display", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+   min-height: 100vh;
+}
+
+/* Remove the big top gap: keep only 8px top padding */
+main .block-container {
+   padding: 8px 20px 48px !important;
+   max-width: 1180px;
+}
+
+.stApp>header {
+   background: transparent;
+   border: none;
+}
+
+/* Fullscreen Liquid Ether behind everything (no layout height) */
+#liquid-ether-bg {
+   position: fixed;
+   inset: 0;
+   pointer-events: none;
+   z-index: -1;
+}
+
+#liquid-ether-bg canvas {
+   position: absolute;
+   inset: 0;
+   width: 100% !important;
+   height: 100% !important;
+   display: block;
+   pointer-events: none;
+}
+
+/* Headings */
+h1.app-title {
+   font-size: clamp(2.2rem, 2.2vw + 1.2rem, 3rem) !important;
+   font-weight: 800;
+   letter-spacing: -0.02em;
+   margin: 4px 0 6px 0;
+   background: linear-gradient(120deg, var(--accent1), var(--accent2), var(--accent3));
+   background-size: 200% auto;
+   -webkit-background-clip: text;
+   background-clip: text;
+   color: transparent;
+   filter: drop-shadow(0 18px 55px rgba(68, 255, 216, .2));
+}
+
+p.app-subtitle {
+   margin: 0 0 16px 0;
+   font-size: 1.02rem;
+   color: var(--muted);
+   letter-spacing: .08em;
+   text-transform: uppercase;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"]>div:first-child {
+   background: rgba(6, 10, 21, .85);
+   border-right: 1px solid rgba(103, 132, 181, .22);
+   backdrop-filter: blur(22px);
+   box-shadow: 15px 0 45px rgba(0, 0, 0, .35);
+}
+
+[data-testid="stSidebar"] * {
+   color: var(--text);
+}
+
+/* Inputs */
+.stTextArea textarea,
+.stTextInput input {
+   background: rgba(12, 18, 33, .9) !important;
+   color: var(--text) !important;
+   border-radius: 16px !important;
+   border: 1px solid rgba(103, 132, 181, .28) !important;
+   box-shadow: inset 0 0 0 1px rgba(103, 132, 181, .08), 0 25px 60px rgba(10, 15, 40, .45);
+}
+
+/* Cards */
+.card {
+   margin: 0;
+   padding: 0;
+   background: transparent;
+   border: none;
+   box-shadow: none;
+}
+
+.output-card {
+   border: 1px solid rgba(103, 132, 181, .24);
+   background: linear-gradient(140deg, rgba(16, 23, 38, .9), rgba(16, 31, 55, .82));
+   border-radius: 18px;
+   padding: 22px 24px;
+   margin-top: 12px;
+   box-shadow: 0 20px 70px rgba(5, 10, 35, .55), inset 0 0 0 1px rgba(255, 255, 255, .02);
+   backdrop-filter: blur(22px);
+}
+
+/* Buttons */
+.stButton>button,
+.stDownloadButton>button {
+   background: linear-gradient(115deg, var(--success1), var(--success2)) !important;
+   color: #05101c !important;
+   border: none !important;
+   border-radius: 999px !important;
+   padding: .65rem 1.45rem !important;
+   font-weight: 700 !important;
+   box-shadow: 0 15px 40px rgba(50, 224, 184, .38);
+}
+
+/* Badges */
+.badge {
+   display: inline-flex;
+   align-items: center;
+   gap: .35rem;
+   border-radius: 999px;
+   padding: .45rem .9rem;
+   font-size: .82rem;
+   font-weight: 600;
+   background: linear-gradient(120deg, rgba(85, 178, 255, .85), rgba(198, 143, 255, .85));
+   color: #05101c;
+   border: 1px solid rgba(255, 255, 255, .25);
+   box-shadow: 0 0 18px rgba(85, 178, 255, .45);
+   margin: 0 .6rem .6rem 0;
+   text-transform: uppercase;
+   letter-spacing: .05em;
+}
+
+/* Output text */
+.output-text {
+   font-size: 1.08rem;
+   line-height: 1.64;
+   color: var(--text);
+}
+
+/* Divider + Progress + Json */
+.soft-divider {
+   height: 1px;
+   margin: 14px 0 20px;
+   background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .25), rgba(255, 255, 255, 0));
+}
+
+div[data-testid="stProgressBar"]>div>div {
+   background: linear-gradient(90deg, var(--accent3), var(--accent1));
+}
+
+div[data-testid="stJson"] pre {
+   background: rgba(12, 18, 33, .78) !important;
+   border-radius: 14px !important;
+   border: 1px solid rgba(103, 132, 181, .24) !important;
+   color: var(--text) !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+   width: 11px;
+}
+
+::-webkit-scrollbar-thumb {
+   background: linear-gradient(180deg, rgba(85, 178, 255, .35), rgba(198, 143, 255, .35));
+   border-radius: 999px;
+}

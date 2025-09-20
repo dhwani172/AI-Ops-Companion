@@ -1,0 +1,33 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.env
+.env.*
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Hugging Face / caches / large artifacts
+.hf_cache/
+.huggingface/
+.cache/
+models/onnx/*.onnx
+*.safetensors
+*.pt
+
+# Node / web temp (if any)
+node_modules/
+
+# OS / Editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs & temps
+*.log
+tmp/

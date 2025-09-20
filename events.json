@@ -1,0 +1,352 @@
+[
+  {
+    "timestamp_utc": "2025-09-20T08:49:40.222554Z",
+    "model": "t5-small",
+    "recipe": "summary",
+    "input_file": "samples\\meeting.txt",
+    "input_chars": 232,
+    "output": "- Frontend needs a decision on the UI library by Friday . - Next sprint goal: ship the beta to 10 pilot users .",
+    "latency_ms": 3399
+  },
+  {
+    "timestamp_utc": "2025-09-20T09:02:49.988422Z",
+    "model": "t5-small",
+    "recipe": "summary",
+    "input_chars": 232,
+    "output": "- Frontend needs a decision on the UI library by Friday . - Next sprint goal: ship the beta to 10 pilot users .",
+    "latency_ms": 3304,
+    "safeguards": {
+      "safe_mode": true,
+      "max_chars": 600,
+      "truncated": false,
+      "redactions": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0
+      },
+      "flags": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0,
+        "keywords": 0
+      }
+    },
+    "meta": {
+      "input_file": "samples\\meeting.txt"
+    }
+  },
+  {
+    "timestamp_utc": "2025-09-20T09:33:31.052627Z",
+    "model": "t5-small",
+    "recipe": "action_items",
+    "input_chars": 109,
+    "output": "as bullet points. respond as bullet points. Team sync: Rahul to choose UI library; Aditi waiting on auth tokens; ship beta to 10 pilot users next sprint.",
+    "latency_ms": 1819,
+    "safeguards": {
+      "safe_mode": true,
+      "max_chars": 600,
+      "truncated": false,
+      "redactions": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0
+      },
+      "flags": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0,
+        "keywords": 0
+      }
+    },
+    "meta": {
+      "source": "api"
+    }
+  },
+  {
+    "timestamp_utc": "2025-09-20T09:49:24.041184Z",
+    "model": "t5-small",
+    "recipe": "summary",
+    "input_chars": 232,
+    "output": "- Frontend needs a decision on the UI library by Friday . - Next sprint goal: ship the beta to 10 pilot users .",
+    "latency_ms": 1095,
+    "safeguards": {
+      "safe_mode": true,
+      "max_chars": 600,
+      "truncated": false,
+      "redactions": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0
+      },
+      "flags": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0,
+        "keywords": 0
+      }
+    },
+    "meta": {
+      "input_file": "samples\\meeting.txt"
+    }
+  },
+  {
+    "timestamp_utc": "2025-09-20T09:51:55.179398Z",
+    "model": "t5-small",
+    "recipe": "brainstorm",
+    "input_chars": 232,
+    "output": "5 short ideas to move this forward. brainstorm 5 short ideas to move this forward. use numbered list. team sync notes: - Project Phoenix is blocked on API credentials. - Frontend needs decision on the UI library by Friday. - Next sprint goal: ship th…",
+    "latency_ms": 3336,
+    "safeguards": {
+      "safe_mode": true,
+      "max_chars": 250,
+      "truncated": true,
+      "redactions": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0
+      },
+      "flags": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0,
+        "keywords": 1
+      }
+    },
+    "meta": {
+      "source": "dashboard"
+    }
+  },
+  {
+    "timestamp_utc": "2025-09-20T09:51:55.179398Z",
+    "model": "t5-small",
+    "recipe": "brainstorm",
+    "input_chars": 232,
+    "output": "5 short ideas to move this forward. brainstorm 5 short ideas to move this forward. use numbered list. team sync notes: - Project Phoenix is blocked on API credentials. - Frontend needs decision on the UI library by Friday. - Next sprint goal: ship th…",
+    "latency_ms": 3336,
+    "safeguards": {
+      "safe_mode": true,
+      "max_chars": 250,
+      "truncated": true,
+      "redactions": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0
+      },
+      "flags": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0,
+        "keywords": 1
+      }
+    },
+    "meta": {
+      "source": "dashboard"
+    }
+  },
+  {
+    "timestamp_utc": "2025-09-20T09:52:07.687382Z",
+    "model": "t5-small",
+    "recipe": "summary",
+    "input_chars": 232,
+    "output": "- Frontend needs a decision on the UI library by Friday . - Next sprint goal: ship the beta to 10 pilot users .",
+    "latency_ms": 981,
+    "safeguards": {
+      "safe_mode": true,
+      "max_chars": 250,
+      "truncated": false,
+      "redactions": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0
+      },
+      "flags": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0,
+        "keywords": 0
+      }
+    },
+    "meta": {
+      "source": "dashboard"
+    }
+  },
+  {
+    "timestamp_utc": "2025-09-20T09:52:07.687382Z",
+    "model": "t5-small",
+    "recipe": "summary",
+    "input_chars": 232,
+    "output": "- Frontend needs a decision on the UI library by Friday . - Next sprint goal: ship the beta to 10 pilot users .",
+    "latency_ms": 981,
+    "safeguards": {
+      "safe_mode": true,
+      "max_chars": 250,
+      "truncated": false,
+      "redactions": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0
+      },
+      "flags": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0,
+        "keywords": 0
+      }
+    },
+    "meta": {
+      "source": "dashboard"
+    }
+  },
+  {
+    "timestamp_utc": "2025-09-20T09:53:53.538783Z",
+    "model": "t5-small",
+    "recipe": "summary",
+    "input_chars": 179,
+    "output": "Rahul to finish login API by Thursday. - Meera to test mobile sign-up flow. - Next sprint we target 50 beta users .",
+    "latency_ms": 5480,
+    "safeguards": {
+      "safe_mode": true,
+      "max_chars": 600,
+      "truncated": false,
+      "redactions": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0
+      },
+      "flags": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0,
+        "keywords": 0
+      }
+    },
+    "meta": {
+      "source": "dashboard"
+    }
+  },
+  {
+    "timestamp_utc": "2025-09-20T09:53:53.538783Z",
+    "model": "t5-small",
+    "recipe": "summary",
+    "input_chars": 179,
+    "output": "Rahul to finish login API by Thursday. - Meera to test mobile sign-up flow. - Next sprint we target 50 beta users .",
+    "latency_ms": 5480,
+    "safeguards": {
+      "safe_mode": true,
+      "max_chars": 600,
+      "truncated": false,
+      "redactions": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0
+      },
+      "flags": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0,
+        "keywords": 0
+      }
+    },
+    "meta": {
+      "source": "dashboard"
+    }
+  },
+  {
+    "timestamp_utc": "2025-09-20T09:57:25.056295Z",
+    "model": "t5-small",
+    "recipe": "summary",
+    "input_chars": 232,
+    "output": "- Frontend needs a decision on the UI library by Friday . - Next sprint goal: ship the beta to 10 pilot users .",
+    "latency_ms": 5674,
+    "safeguards": {
+      "safe_mode": true,
+      "max_chars": 600,
+      "truncated": false,
+      "redactions": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0
+      },
+      "flags": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0,
+        "keywords": 0
+      }
+    },
+    "meta": {
+      "source": "dashboard"
+    }
+  },
+  {
+    "timestamp_utc": "2025-09-20T09:57:25.056295Z",
+    "model": "t5-small",
+    "recipe": "summary",
+    "input_chars": 232,
+    "output": "- Frontend needs a decision on the UI library by Friday . - Next sprint goal: ship the beta to 10 pilot users .",
+    "latency_ms": 5674,
+    "safeguards": {
+      "safe_mode": true,
+      "max_chars": 600,
+      "truncated": false,
+      "redactions": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0
+      },
+      "flags": {
+        "email": 0,
+        "phone": 0,
+        "aadhaar": 0,
+        "creditcard": 0,
+        "apikey_hint": 0,
+        "keywords": 0
+      }
+    },
+    "meta": {
+      "source": "dashboard"
+    }
+  }
+]

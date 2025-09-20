@@ -1,0 +1,15 @@
+# Simple mapping of task -> preferred model (expand as you grow)
+defaults:
+  model: t5-small
+  max_new_tokens: 160
+  do_sample: false
+
+tasks:
+  summary:
+    model: t5-small
+  action_items:
+    model: google/flan-t5-small
+  brainstorm:
+    model: google/flan-t5-small
+  risk_scan:
+    model: google/flan-t5-small
