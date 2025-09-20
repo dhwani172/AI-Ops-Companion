@@ -1,3 +1,4 @@
+https://ai-ops-companion.streamlit.app/
 # AI-Ops Companion (Local Toolkit)
 AI-Ops Companion is a lightweight local toolkit that helps you experiment with AI pipelines for operations and productivity.
 It combines a Hugging Face–powered text model, custom safeguards, a FastAPI service, and a Streamlit dashboard — giving you an end-to-end playground for AI-assisted workflows.
