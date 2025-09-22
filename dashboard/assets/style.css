@@ -1,29 +1,59 @@
-﻿/* ---- Cosmic Neon Theme ---- */
+﻿/* ==== Cosmic Neon Theme (visual-only) ===================================== */
 :root {
    --bg: #04070f;
-   --bg-alt: #0d1324;
-   --panel: rgba(12, 18, 33, 0.78);
-   --panel-solid: #101726;
-   --border: rgba(103, 132, 181, 0.35);
    --text: #f5f7ff;
    --muted: #97a5c5;
-   --accent1: #55b2ff;
+   --accent1: #235a87;
    --accent2: #c68fff;
    --accent3: #44ffd8;
-   --success1: #21b38e;
-   --success2: #32e0b8;
-   --warning: #ffb968;
+   --ok: #22c55e;
+
+   /* glass */
+   --glass-bg: rgba(14, 18, 28, 0.56);
+   --glass-brd: rgba(151, 173, 206, 0.25);
+   --glass-shadow: 0 20px 60px rgba(3, 6, 16, .55), inset 0 0 0 1px rgba(255, 255, 255, .02);
 }
 
+/* ---- Base --------------------------------------------------------------- */
 body,
 .stApp {
    background: var(--bg);
    color: var(--text);
-   font-family: "Segoe UI", "Inter", "SF Pro Display", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-   min-height: 100vh;
+   font-family: "Segoe UI", "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Remove the big top gap: keep only 8px top padding */
+/* (10) Layered cosmic background behind everything (very subtle) */
+.stApp:before,
+.stApp:after {
+   content: "";
+   position: fixed;
+   inset: 0;
+   pointer-events: none;
+   z-index: -3;
+}
+
+.stApp:before {
+   /* soft nebula */
+   background:
+      radial-gradient(1200px 800px at 15% 20%, rgba(34, 187, 255, .10), transparent 60%),
+      radial-gradient(900px 700px at 85% 10%, rgba(198, 143, 255, .10), transparent 60%),
+      radial-gradient(1000px 900px at 70% 85%, rgba(68, 255, 216, .08), transparent 55%),
+      #04070f;
+}
+
+.stApp:after {
+   /* faint starfield */
+   background-image:
+      radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, .08) 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 70% 60%, rgba(255, 255, 255, .06) 50%, transparent 51%),
+      radial-gradient(1.2px 1.2px at 40% 80%, rgba(255, 255, 255, .05) 50%, transparent 51%),
+      radial-gradient(1.2px 1.2px at 85% 35%, rgba(255, 255, 255, .05) 50%, transparent 51%);
+   background-repeat: repeat;
+   background-size: 500px 500px, 600px 600px, 700px 700px, 800px 800px;
+   opacity: .5;
+}
+
+/* Layout spacing */
 main .block-container {
    padding: 8px 20px 48px !important;
    max-width: 1180px;
@@ -34,7 +64,7 @@ main .block-container {
    border: none;
 }
 
-/* Fullscreen Liquid Ether behind everything (no layout height) */
+/* Background canvas holder (your webgl) */
 #liquid-ether-bg {
    position: fixed;
    inset: 0;
@@ -42,139 +72,490 @@ main .block-container {
    z-index: -1;
 }
 
-#liquid-ether-bg canvas {
-   position: absolute;
-   inset: 0;
-   width: 100% !important;
-   height: 100% !important;
-   display: block;
-   pointer-events: none;
+/* ---- (1) Glass panels --------------------------------------------------- */
+
+.glass-panel {
+   background: var(--glass-bg);
+   border: 1px solid var(--glass-brd);
+   border-radius: 16px;
+   box-shadow: var(--glass-shadow);
+   backdrop-filter: blur(14px);
 }
 
-/* Headings */
-h1.app-title {
-   font-size: clamp(2.2rem, 2.2vw + 1.2rem, 3rem) !important;
-   font-weight: 800;
-   letter-spacing: -0.02em;
-   margin: 4px 0 6px 0;
-   background: linear-gradient(120deg, var(--accent1), var(--accent2), var(--accent3));
-   background-size: 200% auto;
-   -webkit-background-clip: text;
-   background-clip: text;
-   color: transparent;
-   filter: drop-shadow(0 18px 55px rgba(68, 255, 216, .2));
-}
-
-p.app-subtitle {
-   margin: 0 0 16px 0;
-   font-size: 1.02rem;
-   color: var(--muted);
-   letter-spacing: .08em;
-   text-transform: uppercase;
-}
-
-/* Sidebar */
 [data-testid="stSidebar"]>div:first-child {
-   background: rgba(6, 10, 21, .85);
-   border-right: 1px solid rgba(103, 132, 181, .22);
-   backdrop-filter: blur(22px);
+   background: rgba(10, 14, 22, .62);
+   border-right: 1px solid var(--glass-brd);
+   backdrop-filter: blur(12px);
    box-shadow: 15px 0 45px rgba(0, 0, 0, .35);
 }
 
-[data-testid="stSidebar"] * {
-   color: var(--text);
+/* Streamlit code & JSON blocks inside a glass panel look */
+.stCodeBlock,
+[data-testid="stJson"] pre {
+   background: rgba(10, 14, 22, .72) !important;
+   border: 1px solid var(--glass-brd) !important;
+   border-radius: 14px !important;
+   box-shadow: var(--glass-shadow);
 }
 
-/* Inputs */
-.stTextArea textarea,
-.stTextInput input {
-   background: rgba(12, 18, 33, .9) !important;
-   color: var(--text) !important;
-   border-radius: 16px !important;
-   border: 1px solid rgba(103, 132, 181, .28) !important;
-   box-shadow: inset 0 0 0 1px rgba(103, 132, 181, .08), 0 25px 60px rgba(10, 15, 40, .45);
-}
-
-/* Cards */
-.card {
-   margin: 0;
-   padding: 0;
-   background: transparent;
-   border: none;
-   box-shadow: none;
-}
-
-.output-card {
-   border: 1px solid rgba(103, 132, 181, .24);
-   background: linear-gradient(140deg, rgba(16, 23, 38, .9), rgba(16, 31, 55, .82));
-   border-radius: 18px;
-   padding: 22px 24px;
-   margin-top: 12px;
-   box-shadow: 0 20px 70px rgba(5, 10, 35, .55), inset 0 0 0 1px rgba(255, 255, 255, .02);
-   backdrop-filter: blur(22px);
-}
-
-/* Buttons */
+/* ---- Buttons (3 neon glow + 6 hover micro-interactions) ----------------- */
 .stButton>button,
 .stDownloadButton>button {
-   background: linear-gradient(115deg, var(--success1), var(--success2)) !important;
-   color: #05101c !important;
+   background: linear-gradient(115deg, var(--accent1), var(--accent2)) !important;
+   color: #fff !important;
+   text-shadow: 0 1px 2px rgba(0, 0, 0, .65);
    border: none !important;
-   border-radius: 999px !important;
-   padding: .65rem 1.45rem !important;
-   font-weight: 700 !important;
-   box-shadow: 0 15px 40px rgba(50, 224, 184, .38);
+   border-radius: 12px !important;
+   padding: .7rem 1.5rem !important;
+   font-weight: 800 !important;
+   font-size: .96rem !important;
+   transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+   box-shadow: 0 10px 28px rgba(85, 178, 255, .42), 0 0 18px rgba(198, 143, 255, .28);
 }
 
-/* Badges */
+.stButton>button:hover,
+.stDownloadButton>button:hover {
+   transform: translateY(-2px) scale(1.03);
+   filter: brightness(1.03);
+   box-shadow: 0 16px 42px rgba(85, 178, 255, .55), 0 0 26px rgba(198, 143, 255, .42);
+}
+
+.stButton>button:active,
+.stDownloadButton>button:active {
+   transform: translateY(1px) scale(.98);
+}
+
+/* ---- Badges (3 glow + 6 hover) ----------------------------------------- */
+.badge-row {
+   margin: 10px 0 8px;
+}
+
 .badge {
    display: inline-flex;
    align-items: center;
    gap: .35rem;
-   border-radius: 999px;
-   padding: .45rem .9rem;
-   font-size: .82rem;
-   font-weight: 600;
-   background: linear-gradient(120deg, rgba(85, 178, 255, .85), rgba(198, 143, 255, .85));
-   color: #05101c;
-   border: 1px solid rgba(255, 255, 255, .25);
-   box-shadow: 0 0 18px rgba(85, 178, 255, .45);
    margin: 0 .6rem .6rem 0;
-   text-transform: uppercase;
+   padding: .48rem .95rem;
+   border-radius: 999px;
+   font-size: .82rem;
+   font-weight: 700;
+   color: #05101c;
    letter-spacing: .05em;
+   text-transform: uppercase;
+   background: linear-gradient(120deg, rgba(85, 178, 255, .88), rgba(198, 143, 255, .88));
+   border: 1px solid rgba(255, 255, 255, .25);
+   box-shadow: 0 0 18px rgba(85, 178, 255, .35);
+   transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
 }
 
-/* Output text */
-.output-text {
-   font-size: 1.08rem;
-   line-height: 1.64;
-   color: var(--text);
+.badge:hover {
+   transform: translateY(-1px);
+   filter: brightness(1.05);
+   box-shadow: 0 0 26px rgba(85, 178, 255, .5);
 }
 
-/* Divider + Progress + Json */
+/* ---- Latency banner ----------------------------------------------------- */
+.latency-banner {
+   margin: 8px 0 10px;
+   padding: 10px 12px;
+   border-radius: 12px;
+   background: #11161e;
+   color: #c9ffda;
+   border: 1px solid #223127;
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   font-weight: 700;
+   box-shadow: 0 12px 30px rgba(5, 10, 35, .45);
+}
+
+.latency-banner .dot {
+   width: 10px;
+   height: 10px;
+   border-radius: 50%;
+}
+
+.latency-banner .dot.ok {
+   background: var(--ok);
+   box-shadow: 0 0 12px rgba(34, 197, 94, .75);
+}
+
+/* ---- Inputs (inside glass) --------------------------------------------- */
+.stTextArea textarea,
+.stTextInput input {
+   background: rgba(12, 18, 33, .88) !important;
+   color: var(--text) !important;
+   border-radius: 14px !important;
+   border: 1px solid var(--glass-brd) !important;
+   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .02);
+   transition: box-shadow .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.stTextArea textarea:focus,
+.stTextInput input:focus {
+   border-color: var(--accent1) !important;
+   box-shadow: 0 0 0 1px var(--accent1), 0 0 24px rgba(85, 178, 255, .28);
+   transform: translateY(-1px);
+}
+
+/* ---- Title (9 floating / parallax vibe) -------------------------------- */
+.app-title {
+   font-size: clamp(2.6rem, 2.4vw + 1.6rem, 3.2rem);
+   font-weight: 900;
+   letter-spacing: -.02em;
+   background: linear-gradient(120deg, var(--accent1), var(--accent2), var(--accent3));
+   -webkit-background-clip: text;
+   background-clip: text;
+   color: transparent;
+   filter: drop-shadow(0 18px 55px rgba(68, 255, 216, .22));
+   margin-bottom: .45rem;
+   will-change: transform, filter;
+   animation: titleFloat 10s ease-in-out infinite;
+}
+
+@keyframes titleFloat {
+   0% {
+      transform: translateY(0px);
+      filter: drop-shadow(0 18px 55px rgba(68, 255, 216, .22));
+   }
+
+   50% {
+      transform: translateY(-4px);
+      filter: drop-shadow(0 22px 65px rgba(68, 255, 216, .28));
+   }
+
+   100% {
+      transform: translateY(0px);
+      filter: drop-shadow(0 18px 55px rgba(68, 255, 216, .22));
+   }
+}
+
+/* ---- Rotating subtitle -------------------------------------------------- */
+.app-rotator-row {
+   display: inline-flex;
+   align-items: center;
+   gap: .55rem;
+   margin-bottom: 1.1rem;
+   letter-spacing: .18em;
+   text-transform: uppercase;
+   font-size: .95rem;
+   font-weight: 700;
+   color: var(--muted);
+   opacity: .95;
+   animation: titleFloat 12s ease-in-out infinite reverse;
+   /* subtle parallax */
+}
+
+.app-rotator-dot {
+   font-size: .9rem;
+   color: var(--accent3);
+   line-height: 1;
+   filter: drop-shadow(0 0 10px rgba(68, 255, 216, .55));
+}
+
+.app-rotator-label::after {
+   content: "Summaries";
+   animation: rotatorCycle 9s steps(1, end) infinite;
+   text-shadow: 0 0 12px rgba(85, 178, 255, .35);
+}
+
+@keyframes rotatorCycle {
+
+   0%,
+   29.99% {
+      content: "Summaries";
+   }
+
+   30%,
+   59.99% {
+      content: "Action Items";
+   }
+
+   60%,
+   89.99% {
+      content: "Brainstorm";
+   }
+
+   90%,
+   100% {
+      content: "Summaries";
+   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+   .app-title,
+   .app-rotator-row {
+      animation: none;
+   }
+
+   .app-rotator-label::after {
+      animation: none;
+      content: "Summaries";
+   }
+}
+
+@media (max-width:720px) {
+
+   .app-title,
+   .app-rotator-row {
+      text-align: center;
+      justify-content: center;
+   }
+}
+
+/* ---- (7) Soft gradient dividers + nicer section headers ---------------- */
 .soft-divider {
    height: 1px;
-   margin: 14px 0 20px;
-   background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .25), rgba(255, 255, 255, 0));
+   width: 100%;
+   margin: 16px 0 18px;
+   position: relative;
+   overflow: hidden;
+   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .18), transparent);
 }
 
-div[data-testid="stProgressBar"]>div>div {
-   background: linear-gradient(90deg, var(--accent3), var(--accent1));
+.soft-divider:after {
+   content: "";
+   position: absolute;
+   inset: 0;
+   background: linear-gradient(90deg, transparent, rgba(85, 178, 255, .55), transparent);
+   animation: shimmer 5s ease-in-out infinite;
 }
 
-div[data-testid="stJson"] pre {
-   background: rgba(12, 18, 33, .78) !important;
-   border-radius: 14px !important;
-   border: 1px solid rgba(103, 132, 181, .24) !important;
-   color: var(--text) !important;
+@keyframes shimmer {
+   0% {
+      transform: translateX(-100%);
+   }
+
+   50% {
+      transform: translateX(100%);
+   }
+
+   100% {
+      transform: translateX(100%);
+   }
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-   width: 11px;
+h2,
+h3 {
+   letter-spacing: .02em;
+   text-shadow: 0 0 12px rgba(198, 143, 255, .12);
 }
 
-::-webkit-scrollbar-thumb {
-   background: linear-gradient(180deg, rgba(85, 178, 255, .35), rgba(198, 143, 255, .35));
+/* ---- Top-right hover info dock (kept; only visuals) -------------------- */
+.info-dock {
+   position: fixed;
+   top: 8px;
+   right: 18px;
+   z-index: 9999;
+   display: flex;
+   gap: 10px;
+   align-items: flex-start;
+   pointer-events: none;
+}
+
+.info-dock .info-section {
+   background: rgba(12, 18, 33, .84);
+   border: 1px solid var(--glass-brd);
+   border-radius: 14px;
+   padding: 10px 10px 8px;
+   backdrop-filter: blur(10px);
+   box-shadow: var(--glass-shadow);
+   pointer-events: auto;
+}
+
+.info-dock .info-title {
+   font-size: .78rem;
+   text-transform: uppercase;
+   letter-spacing: .12em;
+   color: #a9b6d6;
+   margin: 2px 6px 8px;
+}
+
+.info-chip {
+   position: relative;
+   display: inline-block;
+   margin: 4px;
+   padding: 6px 10px;
    border-radius: 999px;
+   background: linear-gradient(120deg, rgba(85, 178, 255, .18), rgba(198, 143, 255, .18));
+   border: 1px solid rgba(103, 132, 181, .35);
+   color: #e7edff;
+   font-weight: 700;
+   font-size: .86rem;
+   cursor: help;
+   transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.info-chip:hover {
+   transform: translateY(-1px) scale(1.02);
+   filter: brightness(1.06);
+   box-shadow: 0 0 16px rgba(85, 178, 255, .35);
+}
+
+/* tooltip below chips (already fixed to avoid clipping) */
+.info-chip::after {
+   content: attr(data-tip);
+   white-space: pre-wrap;
+   position: absolute;
+   top: calc(100% + 10px);
+   right: 0;
+   min-width: 220px;
+   max-width: min(360px, 92vw);
+   max-height: min(56vh, 480px);
+   overflow: auto;
+   padding: 10px 12px;
+   background: rgba(10, 16, 30, .98);
+   border: 1px solid rgba(103, 132, 181, .45);
+   color: #eaf1ff;
+   font-size: .86rem;
+   line-height: 1.35;
+   border-radius: 10px;
+   box-shadow: 0 18px 40px rgba(0, 0, 0, .45);
+   opacity: 0;
+   pointer-events: none;
+   transition: opacity .16s ease;
+   z-index: 10000;
+}
+
+.info-chip::before {
+   content: "";
+   position: absolute;
+   top: calc(100% + 6px);
+   right: 14px;
+   width: 10px;
+   height: 10px;
+   transform: rotate(45deg);
+   background: rgba(10, 16, 30, .98);
+   border-left: 1px solid rgba(103, 132, 181, .45);
+   border-top: 1px solid rgba(103, 132, 181, .45);
+   opacity: 0;
+   transition: opacity .16s ease;
+   z-index: 10001;
+}
+
+.info-chip:hover::after,
+.info-chip:hover::before {
+   opacity: 1;
+}
+
+@media (max-width:860px) {
+   .info-dock {
+      display: none;
+   }
+}
+
+/* === Floating Info Dock: glass + neon glow upgrade === */
+.info-dock {
+   position: fixed;
+   top: 14px;
+   right: 18px;
+   z-index: 99999;
+   /* extra high so it stays above JSON/code blocks */
+   display: flex;
+   gap: 12px;
+   align-items: flex-start;
+   pointer-events: none;
+   /* container ignores clicks… */
+   filter: drop-shadow(0 10px 30px rgba(68, 255, 216, 0.12)) drop-shadow(0 2px 16px rgba(85, 178, 255, 0.12));
+}
+
+.info-dock .info-section {
+   pointer-events: auto;
+   /* …but sections/chips are clickable */
+   background: rgba(10, 16, 30, 0.65);
+   border: 1px solid rgba(120, 160, 220, 0.28);
+   border-radius: 14px;
+   padding: 10px 10px 8px;
+   /* subtle neon rim */
+   box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+      0 12px 28px rgba(5, 10, 35, 0.55),
+      0 0 22px rgba(68, 255, 216, 0.08),
+      0 0 28px rgba(85, 178, 255, 0.08);
+   transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+   backdrop-filter: blur(10px);
+   -webkit-backdrop-filter: blur(10px);
+}
+
+/* boost the blur/brightness if the browser supports heavy backdrop-filter */
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+   .info-dock .info-section {
+      background: linear-gradient(180deg, rgba(10, 16, 30, 0.45), rgba(10, 16, 30, 0.68));
+      backdrop-filter: blur(14px) saturate(120%);
+      -webkit-backdrop-filter: blur(14px) saturate(120%);
+   }
+}
+
+/* gentle “lift” on hover */
+.info-dock .info-section:hover {
+   transform: translateY(-2px);
+   border-color: rgba(198, 143, 255, 0.42);
+   box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+      0 16px 34px rgba(5, 10, 35, 0.6),
+      0 0 26px rgba(68, 255, 216, 0.12),
+      0 0 36px rgba(85, 178, 255, 0.14);
+}
+
+/* chips: brighter hover + tiny glow */
+.info-chip {
+   background: linear-gradient(120deg, rgba(85, 178, 255, .22), rgba(198, 143, 255, .22));
+   border: 1px solid rgba(120, 160, 220, .38);
+   transition: transform .14s ease, filter .14s ease, box-shadow .14s ease, border-color .14s ease;
+   box-shadow: 0 2px 10px rgba(12, 18, 33, 0.35);
+}
+
+.info-chip:hover {
+   transform: translateY(-1px);
+   filter: brightness(1.08);
+   border-color: rgba(198, 143, 255, .6);
+   box-shadow:
+      0 6px 16px rgba(12, 18, 33, 0.55),
+      0 0 14px rgba(85, 178, 255, .18),
+      0 0 18px rgba(68, 255, 216, .16);
+}
+
+/* tooltip: add a soft glow so it floats over content */
+.info-chip::after {
+   box-shadow:
+      0 18px 40px rgba(0, 0, 0, .5),
+      0 0 22px rgba(85, 178, 255, 0.14);
+   border-color: rgba(120, 160, 220, .5);
+}
+
+.info-chip::before {
+   box-shadow: 0 0 10px rgba(85, 178, 255, 0.18);
+}
+
+/* --- Make sure fixed means viewport-fixed (undo transforms on app shells) --- */
+html,
+body,
+.stApp,
+[data-testid="stAppViewContainer"],
+[data-testid="stSidebar"] {
+   transform: none !important;
+   perspective: none !important;
+}
+
+/* Safety: avoid any parent creating a new containing block for fixed */
+.stApp,
+[data-testid="stAppViewContainer"] {
+   contain: none !important;
+   will-change: auto !important;
+}
+
+/* Dock itself stays fixed at the viewport corner */
+#info-dock-root.info-dock {
+   position: fixed !important;
+   top: 14px !important;
+   right: 18px !important;
+   z-index: 99999 !important;
+}
+
+/* If any theme layer adds overflow clipping, keep tooltips visible */
+#info-dock-root.info-dock,
+#info-dock-root.info-dock * {
+   overflow: visible !important;
 }

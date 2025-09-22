@@ -1,40 +1,16 @@
-from dataclasses import dataclass
-from typing import Callable, Dict
-
-@dataclass
-class Recipe:
-    name: str
-    build_prompt: Callable[[str], str]
-
-def _summary_prompt(text: str) -> str:
-    # t5-small is best at summarization with the "summarize:" prefix
-    return f"summarize: {text}"
-
-def _action_items_prompt(text: str) -> str:
-    # Not native to t5-small, but works for a demo
-    return (
-        "extract concise action items with owners and deadlines if present. "
-        "respond as bullet points.\n\n"
-        f"{text}"
-    )
-
-def _brainstorm_prompt(text: str) -> str:
-    return (
-        "brainstorm 5 short ideas to move this forward. use numbered list.\n\n"
-        f"{text}"
-    )
-
-RECIPES: Dict[str, Recipe] = {
-    "summary":      Recipe("summary", _summary_prompt),
-    "action_items": Recipe("action_items", _action_items_prompt),
-    "brainstorm":   Recipe("brainstorm", _brainstorm_prompt),
+RECIPES = {
+    "summary": (
+        "Summarize the notes into **concise, complete bullets** with sections:\n"
+        "Decisions, Actions (with owners), Risks. Keep important numbers.\n"
+        "Format:\n"
+        "Decisions:\n- …\nActions:\n- Owner: … — …\nRisks:\n- …\n\nInput:\n"
+    ),
+    "action_items": (
+        "Extract **actionable tasks** with owners and deadlines if present.\n"
+        "Return bullets in the format:\n"
+        "- Owner: <name> — <verb-first task> (due <date> if any)\n\nInput:\n"
+    ),
+    "brainstorm": (
+        "Brainstorm 8–12 **practical, non-obvious** ideas. Use short bullets.\n\nInput:\n"
+    ),
 }
-
-def list_recipes() -> Dict[str, str]:
-    return {k: v.name for k, v in RECIPES.items()}
-
-def apply_recipe(recipe_name: str, text: str) -> str:
-    recipe = RECIPES.get(recipe_name)
-    if not recipe:
-        raise ValueError(f"Unknown recipe '{recipe_name}'. Available: {', '.join(RECIPES.keys())}")
-    return recipe.build_prompt(text)

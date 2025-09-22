@@ -1,4 +1,58 @@
-﻿// Entrance animations + typewriter + Liquid Ether bootstrap
+(function () {
+   const ready = (cb) => (document.readyState !== 'loading'
+      ? cb()
+      : document.addEventListener('DOMContentLoaded', cb));
+
+   function initRotator() {
+      const el = document.getElementById('recipe-rotator');
+      if (!el) return;
+
+      const entries = Array.isArray(window.__aiOpsRecipes) && window.__aiOpsRecipes.length
+         ? window.__aiOpsRecipes
+         : ['Summaries', 'Action Items', 'Brainstorming'];
+
+      let index = 0;
+      el.textContent = entries[0];
+
+      if (window.__recipeRotatorInterval) {
+         clearInterval(window.__recipeRotatorInterval);
+      }
+
+      const swap = () => {
+         index = (index + 1) % entries.length;
+         const next = entries[index];
+         if (window.anime) {
+            window.anime.timeline({ duration: 900 })
+               .add({ targets: el, opacity: [1, 0], translateY: [0, -8], easing: 'easeInQuad' })
+               .add({
+                  targets: el,
+                  opacity: [0, 1],
+                  translateY: [8, 0],
+                  easing: 'easeOutQuad',
+                  begin: () => { el.textContent = next; }
+               });
+         } else {
+            el.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(-6px)';
+            setTimeout(() => {
+               el.textContent = next;
+               el.style.opacity = 1;
+               el.style.transform = 'translateY(0)';
+            }, 200);
+         }
+      };
+
+      window.__recipeRotatorInterval = setInterval(swap, 3600);
+   }
+
+   const bootstrap = () => {
+      initRotator();
+   };
+
+   ready(bootstrap);
+   document.addEventListener('streamlit:rendered', bootstrap);
+})();
 
 function typeWriter(text, elementId, speed = 24) {
    const el = document.getElementById(elementId);
@@ -16,85 +70,14 @@ function typeWriter(text, elementId, speed = 24) {
    })();
 }
 
-(function () {
-   const ready = (cb) => (document.readyState !== 'loading' ? cb() : document.addEventListener('DOMContentLoaded', cb));
-
-   // Page entrance
-   function animateEntrance() {
-      if (!window.anime) return;
-      window.anime.set(['.app-title', '.app-subtitle', '.card'], { opacity: 0, translateY: 18 });
-      window.anime.timeline({ easing: 'easeOutQuint', duration: 600 })
-         .add({ targets: '.app-title', opacity: [0, 1], translateY: [18, 0] })
-         .add({ targets: '.app-subtitle', opacity: [0, 1], translateY: [14, 0] }, '-=350')
-         .add({ targets: '.card', opacity: [0, 1], translateY: [18, 0] }, '-=250');
+function flashBanner(id, ms = 1400) {
+   const el = document.getElementById(id);
+   if (!el) return;
+   if (window.anime) {
+      window.anime({ targets: el, opacity: [0, 1, 0], duration: ms, easing: 'easeInOutQuad' });
+   } else {
+      el.style.transition = 'opacity 0.6s ease';
+      el.style.opacity = 1;
+      setTimeout(() => (el.style.opacity = 0), ms);
    }
-
-   // Liquid Ether background (fixed, fullscreen)
-   function initLiquidEther() {
-      const root = document.getElementById('liquid-ether-bg');
-      if (!root || !window.THREE) return;
-
-      // Make sure it doesn't consume layout space
-      root.style.position = 'fixed';
-      root.style.inset = '0';
-      root.style.pointerEvents = 'none';
-      root.style.zIndex = '-1';
-
-      // Minimal fluid render (using your GLSL/WebGL classes ported)
-      // For brevity, use a gentle animated gradient if WebGL fails.
-      try {
-         // If you keep your long WebGL manager from before, call it here.
-         // createLiquidEther(root, options)  <-- if you split it out.
-         // For now, just create a very light animated canvas background color.
-         const canvas = document.createElement('canvas');
-         const ctx = canvas.getContext('2d');
-         root.appendChild(canvas);
-
-         function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-         }
-         resize();
-         window.addEventListener('resize', resize);
-
-         let t = 0;
-         (function loop() {
-            const w = canvas.width, h = canvas.height;
-            const g = ctx.createLinearGradient(0, 0, w, h);
-            g.addColorStop(0, '#0a1326');
-            g.addColorStop(1, '#101d3a');
-            ctx.fillStyle = g;
-            ctx.fillRect(0, 0, w, h);
-
-            // soft moving orbs
-            const r = 140 + 60 * Math.sin(t * 0.003);
-            ctx.globalAlpha = 0.12;
-            ctx.beginPath();
-            ctx.arc((w / 2) + 220 * Math.cos(t * 0.0008), (h / 2) + 160 * Math.sin(t * 0.0011), r, 0, Math.PI * 2);
-            ctx.fillStyle = '#55b2ff';
-            ctx.fill();
-
-            ctx.beginPath();
-            ctx.arc((w / 2) + 260 * Math.cos(t * 0.0013 + 1.3), (h / 2) + 200 * Math.sin(t * 0.0009 + 0.7), r * 0.9, 0, Math.PI * 2);
-            ctx.fillStyle = '#c68fff';
-            ctx.fill();
-
-            ctx.globalAlpha = 1;
-            t += 16;
-            requestAnimationFrame(loop);
-         })();
-      } catch (e) {
-         // fallback: static gradient handled by CSS background
-      }
-   }
-
-   ready(() => {
-      animateEntrance();
-      initLiquidEther();
-   });
-
-   // Streamlit reruns fire this event; keep background alive
-   document.addEventListener('streamlit:rendered', () => {
-      initLiquidEther();
-   });
-})();
+}
